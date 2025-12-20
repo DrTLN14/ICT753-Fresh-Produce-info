@@ -1,424 +1,472 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ICT753 Fresh Produce Info</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Coles Fresh Produce Info</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+  <div class="app">
+    <div class="phone">
+      <!-- Top bar -->
+      <div class="topbar">
+        <h1 id="screenTitle">Find Produce</h1>
+        <div class="row">
+          <button id="backBtn" class="icon-btn" style="visibility:hidden" aria-label="Back">←</button>
+          <div class="search">
+            <span>🔎</span>
+            <input id="searchInput" type="text" placeholder="Search (e.g., apple, carrot)"/>
+          </div>
+        </div>
+      </div>
 
-  <div class="phone">
-    <div class="topbar">
-      <button class="icon-btn" id="backBtn" aria-label="Back" onclick="goBack()" hidden>←</button>
-      <div class="title" id="screenTitle">Find Produce</div>
-      <div class="spacer"></div>
+      <!-- Content -->
+      <div class="content">
+        <!-- HOME / CATEGORIES -->
+        <div id="homeScreen">
+          <div class="grid-2">
+            <div class="card category" onclick="openCategory('fruit')">
+              <div class="img-wrap">
+                <img src="images/fruit-mix.jpg" alt="Fruit category"/>
+              </div>
+              <h3>Fruit</h3>
+            </div>
+
+            <div class="card category" onclick="openCategory('vegetables')">
+              <div class="img-wrap">
+                <img src="images/veg-mix.jpg" alt="Vegetables category"/>
+              </div>
+              <h3>Vegetables</h3>
+            </div>
+          </div>
+
+          <p class="helper">Choose a category → select an item → view product details (tabs).</p>
+
+          <!-- GLOBAL SEARCH RESULTS (from home) -->
+          <div id="globalResults" style="display:none; margin-top:14px;">
+            <div class="products" id="globalGrid"></div>
+          </div>
+        </div>
+
+        <!-- LIST SCREEN -->
+        <div id="listScreen" style="display:none;">
+          <div class="products" id="listGrid"></div>
+        </div>
+
+        <!-- DETAIL SCREEN -->
+        <div id="detailScreen" style="display:none;">
+          <div class="detail-head card">
+            <div class="thumb"><img id="detailImg" src="" alt=""/></div>
+            <div class="title">
+              <h2 id="detailName"></h2>
+              <p id="detailMeta"></p>
+            </div>
+          </div>
+
+          <div class="tabs">
+            <button class="tab active" data-tab="info" onclick="setTab('info')">Product Info</button>
+            <button class="tab" data-tab="storage" onclick="setTab('storage')">Storage Guide</button>
+            <button class="tab" data-tab="shelf" onclick="setTab('shelf')">Shelf Life</button>
+            <button class="tab" data-tab="farm" onclick="setTab('farm')">Farm/Producer</button>
+            <button class="tab" data-tab="nutrition" onclick="setTab('nutrition')">Nutrition</button>
+          </div>
+
+          <div class="card detail-body" id="tabContent"></div>
+        </div>
+      </div>
     </div>
-
-    <main class="content">
-      <!-- Category screen -->
-      <section class="screen active" id="screen-category">
-        <div class="search">
-          <span class="search-icon">🔎</span>
-          <input type="text" placeholder="Search" disabled />
-        </div>
-
-        <div class="grid-2">
-          <button class="tile" onclick="openList('fruit')">
-            <div class="tile-img">
-              <img class="tile-photo" src="images/fruit-mix.jpg" alt="Fruit">
-            </div>
-            <div class="tile-label">Fruit</div>
-          </button>
-
-          <button class="tile" onclick="openList('vegetables')">
-            <div class="tile-img">
-              <img class="tile-photo" src="images/veg-mix.jpg" alt="Vegetables">
-            </div>
-            <div class="tile-label">Vegetables</div>
-          </button>
-        </div>
-
-        <p class="hint">Choose a category → select an item → view product details (tabs).</p>
-      </section>
-
-      <!-- List screen -->
-      <section class="screen" id="screen-list">
-        <div class="list-grid" id="listGrid"></div>
-      </section>
-
-      <!-- Product screen -->
-      <section class="screen" id="screen-product">
-        <div class="product-hero">
-          <img class="product-photo" id="productPhoto" src="" alt="">
-          <div class="product-name" id="productName">Product</div>
-        </div>
-
-        <div class="tabs">
-          <button class="tab active" data-tab="info" onclick="setTab('info')">Product Info</button>
-          <button class="tab" data-tab="storage" onclick="setTab('storage')">Storage</button>
-          <button class="tab" data-tab="shelf" onclick="setTab('shelf')">Shelf Life</button>
-          <button class="tab" data-tab="farm" onclick="setTab('farm')">Farm</button>
-          <button class="tab" data-tab="nutrition" onclick="setTab('nutrition')">Nutrition</button>
-        </div>
-
-        <div class="card" id="tabContent"></div>
-      </section>
-    </main>
   </div>
 
 <script>
-const CATALOG = {
-  fruit: [
+  // ---------- DATA ----------
+  const produce = [
+    // FRUIT
     {
-      id: "apple_pink_lady",
+      id: "apple",
+      category: "fruit",
       name: "Coles Pink Lady Apples",
       price: "A$1.09",
-      unit: "approx. 170g each",
+      approx: "approx. 170g each",
       img: "images/apple.jpg",
-      details: {
-        info: { heading: "Product Information", body: [
-          "Pink Lady apples are crisp and sweet-tart, ideal for snacking, salads, and baking.",
-          "Firm texture supports consistent quality and customer satisfaction."
-        ]},
-        storage: { heading: "Storage Guide", sections: [
-          { title: "Room Temperature", bullets: ["Store away from sunlight (short term)."] },
-          { title: "Fridge", bullets: ["Keep in the crisper drawer to maintain crispness."] },
-          { title: "Cut Apples", bullets: ["Airtight container in fridge.", "Add lemon juice to reduce browning."] }
-        ]},
-        shelf: { heading: "Shelf Life", sections: [
-          { title: "Bench Storage", bullets: ["3–5 days depending on ripeness."] },
-          { title: "Kept Chilled", bullets: ["Up to 2–3 weeks."] },
-          { title: "Once Cut", bullets: ["Best within 1–2 days."] }
-        ]},
-        farm: { heading: "Farm / Producer", body: [
-          "Example Grower: Yarra Valley Orchards",
-          "Region: Victoria, Australia 🇦🇺"
-        ]},
-        nutrition: { heading: "Nutrition", bullets: [
-          "Dietary fibre", "Vitamin C", "Naturally low fat", "Hydrating snack"
-        ]}
+      tabs: {
+        info: `Pink Lady apples are crisp, sweet-tart apples ideal for snacks, salads and baking.`,
+        storage: `
+          <ul>
+            <li><b>Room temperature:</b> 2–5 days away from sunlight.</li>
+            <li><b>Fridge:</b> 2–3 weeks in the crisper drawer (keep loose or in a breathable bag).</li>
+            <li><b>Cut apples:</b> Airtight container in fridge; add lemon juice to reduce browning.</li>
+          </ul>`,
+        shelf: `
+          <ul>
+            <li><b>Bench storage:</b> 3–5 days.</li>
+            <li><b>Kept chilled:</b> up to 2–3 weeks.</li>
+            <li><b>Once cut:</b> best within 1–2 days.</li>
+          </ul>`,
+        farm: `Example supplier: Yarra Valley Orchards<br/>Region: Victoria, Australia`,
+        nutrition: `
+          <ul>
+            <li>Source of dietary fibre</li>
+            <li>Contains vitamin C</li>
+            <li>Naturally low in fat and sodium</li>
+          </ul>`
       }
     },
-
     {
-      id: "banana_lady_finger",
+      id: "banana",
+      category: "fruit",
       name: "Coles Lady Finger Bananas",
       price: "A$1.15",
-      unit: "approx. 140g",
+      approx: "approx. 140g",
       img: "images/banana.jpg",
-      details: {
-        info: { heading: "Product Information", body: [
-          "Lady Finger bananas are small, sweet, and creamy—great for snacks and smoothies.",
-          "Popular for convenience and naturally sweet flavour."
-        ]},
-        storage: { heading: "Storage Guide", sections: [
-          { title: "Room Temperature", bullets: ["Store away from sunlight.", "Keep separate from other fruits to slow ripening."] },
-          { title: "Fridge", bullets: ["Refrigerate ripe bananas; skin may darken but flesh stays fresh."] },
-          { title: "Cut Bananas", bullets: ["Airtight container in fridge.", "Use lemon juice to reduce browning."] }
-        ]},
-        shelf: { heading: "Shelf Life", sections: [
-          { title: "Bench Storage", bullets: ["2–4 days depending on ripeness."] },
-          { title: "Kept Chilled", bullets: ["5–7 days once ripe."] },
-          { title: "Once Cut", bullets: ["Best within 1–2 days."] }
-        ]},
-        farm: { heading: "Farm / Producer", body: [
-          "Example Grower: Tropical Coast Bananas",
-          "Region: Queensland, Australia 🇦🇺"
-        ]},
-        nutrition: { heading: "Nutrition", bullets: [
-          "High in potassium", "Fibre", "Vitamin B6", "Quick energy"
-        ]}
+      tabs: {
+        info: `Lady Finger bananas are smaller and sweeter with a smooth, creamy texture—great for lunchboxes.`,
+        storage: `
+          <ul>
+            <li><b>Bench:</b> Keep at room temperature until desired ripeness.</li>
+            <li><b>Fridge:</b> Once ripe, refrigerate to slow ripening (skin darkens, flesh stays fine).</li>
+            <li><b>Cut bananas:</b> Cover and refrigerate; best eaten same day.</li>
+          </ul>`,
+        shelf: `
+          <ul>
+            <li><b>Green:</b> 4–6 days to ripen.</li>
+            <li><b>Ripe:</b> 1–2 days on bench.</li>
+            <li><b>Ripe + chilled:</b> 3–5 more days.</li>
+          </ul>`,
+        farm: `Example grower: North Queensland Banana Co-op<br/>Region: Queensland, Australia`,
+        nutrition: `
+          <ul>
+            <li>Potassium source</li>
+            <li>Vitamin B6</li>
+            <li>Quick energy (carbohydrates)</li>
+          </ul>`
       }
     },
-
     {
-      id: "mango_kensington_pride",
+      id: "mango",
+      category: "fruit",
       name: "Kensington Pride Mango",
       price: "A$3.99",
-      unit: "1 each",
+      approx: "1 each",
       img: "images/mango.jpg",
-      details: {
-        info: { heading: "Product Information", body: [
-          "Kensington Pride mangoes are juicy, aromatic, and richly sweet when ripe.",
-          "Commonly used in smoothies, salads, desserts, and savoury dishes."
-        ]},
-        storage: { heading: "Storage Guide", sections: [
-          { title: "Room Temperature", bullets: ["Ripen on the bench away from sunlight."] },
-          { title: "Fridge", bullets: ["Once ripe, refrigerate to slow ripening."] },
-          { title: "Cut Mango", bullets: ["Airtight container in fridge."] }
-        ]},
-        shelf: { heading: "Shelf Life", sections: [
-          { title: "Bench Storage", bullets: ["Unripe: 2–5 days to ripen.", "Ripe: 1–2 days."] },
-          { title: "Kept Chilled", bullets: ["Ripe: ~3–5 days."] },
-          { title: "Once Cut", bullets: ["Best within 1–2 days."] }
-        ]},
-        farm: { heading: "Farm / Producer", body: [
-          "Example Grower: Northern Tropics Produce Co.",
-          "Region: NT / QLD, Australia 🇦🇺"
-        ]},
-        nutrition: { heading: "Nutrition", bullets: [
-          "Vitamin C", "Vitamin A", "Antioxidants", "Fibre"
-        ]}
+      tabs: {
+        info: `Kensington Pride is a popular Australian mango variety known for its fragrant aroma and juicy, sweet flesh.`,
+        storage: `
+          <ul>
+            <li><b>Unripe:</b> Ripen on bench (avoid direct sun).</li>
+            <li><b>Ripe:</b> Store in fridge 2–4 days.</li>
+            <li><b>Cut mango:</b> Airtight container in fridge; best within 1–2 days.</li>
+          </ul>`,
+        shelf: `
+          <ul>
+            <li><b>Unripe on bench:</b> 2–5 days (until slightly soft).</li>
+            <li><b>Ripe chilled:</b> 2–4 days.</li>
+            <li><b>Once cut:</b> best within 1–2 days.</li>
+          </ul>`,
+        farm: `Example grower: Tropical North Orchards<br/>Region: Northern Territory / Queensland (seasonal)`,
+        nutrition: `
+          <ul>
+            <li>Vitamin C and vitamin A (beta-carotene)</li>
+            <li>Contains fibre</li>
+            <li>Naturally fat-free</li>
+          </ul>`
       }
     },
-
     {
-      id: "grapes_seedless",
+      id: "grapes",
+      category: "fruit",
       name: "Coles Seedless Grapes",
       price: "A$8.50",
-      unit: "approx. 400g",
+      approx: "approx. 400g",
       img: "images/grapes.jpg",
-      details: {
-        info: { heading: "Product Information", body: [
-          "Seedless grapes are crisp and sweet—ideal for snacking and lunchboxes.",
-          "Used in fruit platters, salads, and desserts."
-        ]},
-        storage: { heading: "Storage Guide", sections: [
-          { title: "Fridge (Recommended)", bullets: ["Keep chilled in punnet or breathable container."] },
-          { title: "Before Eating", bullets: ["Rinse just before consuming."] },
-          { title: "Once Washed", bullets: ["Dry well; store with paper towel to reduce moisture."] }
-        ]},
-        shelf: { heading: "Shelf Life", sections: [
-          { title: "Kept Chilled", bullets: ["7–14 days (varies by freshness)."] },
-          { title: "Room Temperature", bullets: ["1–2 days; softens faster."] },
-          { title: "Once Washed", bullets: ["3–5 days if stored dry and chilled."] }
-        ]},
-        farm: { heading: "Farm / Producer", body: [
-          "Example Grower: Sun Valley Vineyards",
-          "Region: VIC / NSW, Australia 🇦🇺"
-        ]},
-        nutrition: { heading: "Nutrition", bullets: [
-          "Antioxidants", "Hydration", "Naturally low fat", "Vitamin K varies"
-        ]}
+      tabs: {
+        info: `Seedless grapes are crisp and refreshing—great for snacking, fruit salads, and cheese boards.`,
+        storage: `
+          <ul>
+            <li><b>Fridge:</b> Keep unwashed in a breathable bag/container.</li>
+            <li><b>Wash:</b> Rinse just before eating to reduce spoilage.</li>
+            <li><b>Freezing:</b> Freeze for a cold snack (texture changes slightly).</li>
+          </ul>`,
+        shelf: `
+          <ul>
+            <li><b>Chilled:</b> 1–2 weeks (best quality in first week).</li>
+            <li><b>Bench:</b> 1 day max (softens quickly).</li>
+          </ul>`,
+        farm: `Example supplier: Sunraysia Vineyards<br/>Region: Victoria / NSW (seasonal)`,
+        nutrition: `
+          <ul>
+            <li>Contains antioxidants (polyphenols)</li>
+            <li>Hydrating fruit (high water content)</li>
+            <li>Small amounts of vitamin K</li>
+          </ul>`
       }
-    }
-  ],
+    },
 
-  vegetables: [
+    // VEGETABLES
     {
       id: "carrots",
+      category: "vegetables",
       name: "Fresh Carrots",
       price: "A$2.50",
-      unit: "approx. 1kg bag",
+      approx: "approx. 1kg",
       img: "images/carrots.jpg",
-      details: {
-        info: { heading: "Product Information", body: [
-          "Carrots are crunchy root vegetables used in salads, soups, stir-fries, and snacks.",
-          "They are known for versatility and long shelf life when stored correctly."
-        ]},
-        storage: { heading: "Storage Guide", sections: [
-          { title: "Fridge", bullets: ["Store in crisper drawer in a breathable bag."] },
-          { title: "Cut Carrots", bullets: ["Store in airtight container with cold water; change every 1–2 days."] }
-        ]},
-        shelf: { heading: "Shelf Life", sections: [
-          { title: "Kept Chilled", bullets: ["Whole: ~2–4 weeks (depends on freshness)."] },
-          { title: "Once Cut", bullets: ["4–7 days (kept cold)."] }
-        ]},
-        farm: { heading: "Farm / Producer", body: [
-          "Example Grower: Riverina Fresh Produce",
-          "Region: NSW, Australia 🇦🇺"
-        ]},
-        nutrition: { heading: "Nutrition", bullets: [
-          "Beta-carotene (vitamin A precursor)", "Fibre", "Antioxidants", "Low calorie"
-        ]}
+      tabs: {
+        info: `Carrots are versatile and crunchy—great raw, roasted, steamed, or added to soups and stir-fries.`,
+        storage: `
+          <ul>
+            <li><b>Fridge:</b> Store in crisper drawer in a bag/container.</li>
+            <li><b>Keep dry:</b> Moisture can cause sliminess.</li>
+            <li><b>Cut carrots:</b> Store in water (change daily) for crispness.</li>
+          </ul>`,
+        shelf: `
+          <ul>
+            <li><b>Chilled:</b> 2–4 weeks.</li>
+            <li><b>Once cut:</b> 3–5 days (best quality).</li>
+          </ul>`,
+        farm: `Example supplier: Riverina Veg Growers<br/>Region: NSW, Australia`,
+        nutrition: `
+          <ul>
+            <li>High in beta-carotene (vitamin A)</li>
+            <li>Source of fibre</li>
+            <li>Low in calories</li>
+          </ul>`
       }
     },
-
     {
       id: "broccoli",
-      name: "Fresh Broccoli",
-      price: "A$3.20",
-      unit: "1 head",
+      category: "vegetables",
+      name: "Broccoli",
+      price: "A$2.90",
+      approx: "1 head",
       img: "images/broccoli.jpg",
-      details: {
-        info: { heading: "Product Information", body: [
-          "Broccoli is nutrient-dense and commonly steamed, roasted, or added to stir-fries.",
-          "Best quality is firm with deep green florets."
-        ]},
-        storage: { heading: "Storage Guide", sections: [
-          { title: "Fridge", bullets: ["Store unwashed in a breathable bag in the crisper drawer."] },
-          { title: "After Washing", bullets: ["Dry well to reduce moisture and spoilage."] }
-        ]},
-        shelf: { heading: "Shelf Life", sections: [
-          { title: "Kept Chilled", bullets: ["Best quality 3–5 days."] },
-          { title: "Cooked", bullets: ["Cooked broccoli: 3–4 days refrigerated."] }
-        ]},
-        farm: { heading: "Farm / Producer", body: [
-          "Example Grower: Gippsland Greens",
-          "Region: Victoria, Australia 🇦🇺"
-        ]},
-        nutrition: { heading: "Nutrition", bullets: [
-          "Vitamin C", "Vitamin K", "Fibre", "Antioxidants"
-        ]}
+      tabs: {
+        info: `Broccoli is a nutrient-dense vegetable ideal for steaming, roasting, stir-fry and pasta dishes.`,
+        storage: `
+          <ul>
+            <li><b>Fridge:</b> Unwashed in a breathable bag.</li>
+            <li><b>Don’t seal tight:</b> Needs airflow to stay fresh.</li>
+            <li><b>Cooked:</b> Store in airtight container, refrigerate.</li>
+          </ul>`,
+        shelf: `
+          <ul>
+            <li><b>Chilled:</b> 3–7 days.</li>
+            <li><b>Cooked:</b> 3–4 days.</li>
+          </ul>`,
+        farm: `Example supplier: Gippsland Produce<br/>Region: Victoria, Australia`,
+        nutrition: `
+          <ul>
+            <li>Vitamin C and vitamin K</li>
+            <li>Contains folate</li>
+            <li>Source of fibre</li>
+          </ul>`
       }
     },
-
     {
       id: "lettuce",
-      name: "Cos Lettuce",
-      price: "A$2.80",
-      unit: "1 each",
+      category: "vegetables",
+      name: "Lettuce",
+      price: "A$2.20",
+      approx: "1 each",
       img: "images/lettuce.jpg",
-      details: {
-        info: { heading: "Product Information", body: [
-          "Cos (romaine) lettuce is crisp and popular for salads, wraps, and sandwiches.",
-          "Fresh leaves should be firm and vibrant with minimal browning."
-        ]},
-        storage: { heading: "Storage Guide", sections: [
-          { title: "Fridge", bullets: ["Keep unwashed in the crisper drawer.", "Wrap in paper towel to reduce moisture."] },
-          { title: "Washed Leaves", bullets: ["Dry thoroughly; store in container lined with paper towel."] }
-        ]},
-        shelf: { heading: "Shelf Life", sections: [
-          { title: "Kept Chilled", bullets: ["Best quality 5–7 days if kept dry."] },
-          { title: "Once Washed", bullets: ["3–5 days (dry + chilled)."] }
-        ]},
-        farm: { heading: "Farm / Producer", body: [
-          "Example Grower: Sydney Basin Farms",
-          "Region: NSW, Australia 🇦🇺"
-        ]},
-        nutrition: { heading: "Nutrition", bullets: [
-          "Hydrating, low calorie", "Folate", "Vitamin K", "Some fibre"
-        ]}
+      tabs: {
+        info: `Lettuce adds crunch and freshness to salads, wraps and sandwiches.`,
+        storage: `
+          <ul>
+            <li><b>Fridge:</b> Wrap in paper towel and store in a bag/container.</li>
+            <li><b>Keep dry:</b> Moisture causes wilting/slime.</li>
+            <li><b>Washed leaves:</b> Dry well; store in sealed container.</li>
+          </ul>`,
+        shelf: `
+          <ul>
+            <li><b>Chilled:</b> 5–10 days (varies by type).</li>
+            <li><b>Washed leaves:</b> 3–5 days.</li>
+          </ul>`,
+        farm: `Example supplier: Hawkesbury Greens<br/>Region: NSW, Australia`,
+        nutrition: `
+          <ul>
+            <li>Hydrating (high water content)</li>
+            <li>Provides folate</li>
+            <li>Low calorie</li>
+          </ul>`
       }
     },
-
     {
       id: "onions",
+      category: "vegetables",
       name: "Brown Onions",
-      price: "A$3.00",
-      unit: "approx. 1kg bag",
+      price: "A$2.00",
+      approx: "approx. 1kg",
       img: "images/onions.jpg",
-      details: {
-        info: { heading: "Product Information", body: [
-          "Brown onions are a staple ingredient used in soups, sauces, curries, and stir-fries.",
-          "They have long shelf life when stored cool, dry, and well-ventilated."
-        ]},
-        storage: { heading: "Storage Guide", sections: [
-          { title: "Pantry", bullets: ["Store whole onions in a cool, dry place with airflow.", "Avoid storing next to potatoes."] },
-          { title: "Cut Onion", bullets: ["Airtight container in the fridge."] }
-        ]},
-        shelf: { heading: "Shelf Life", sections: [
-          { title: "Pantry Storage", bullets: ["Whole: ~2–4 weeks depending on conditions."] },
-          { title: "Once Cut", bullets: ["3–5 days refrigerated."] }
-        ]},
-        farm: { heading: "Farm / Producer", body: [
-          "Example Grower: Murray Valley Produce",
-          "Region: VIC/NSW, Australia 🇦🇺"
-        ]},
-        nutrition: { heading: "Nutrition", bullets: [
-          "Antioxidants (e.g., quercetin)", "Adds flavour with few calories", "Small amounts of vitamin C"
-        ]}
+      tabs: {
+        info: `Onions add depth of flavour to most dishes—great sautéed, roasted, or used as a base for sauces.`,
+        storage: `
+          <ul>
+            <li><b>Pantry:</b> Cool, dark, well-ventilated space (not in plastic bag).</li>
+            <li><b>Fridge (cut):</b> Airtight container; keep away from strong-odour foods.</li>
+          </ul>`,
+        shelf: `
+          <ul>
+            <li><b>Whole (pantry):</b> 2–4 weeks.</li>
+            <li><b>Cut (fridge):</b> 3–7 days.</li>
+          </ul>`,
+        farm: `Example supplier: Murray Basin Growers<br/>Region: VIC/SA, Australia`,
+        nutrition: `
+          <ul>
+            <li>Contains antioxidants (quercetin)</li>
+            <li>Small amounts of vitamin C</li>
+            <li>Low fat, low sodium</li>
+          </ul>`
       }
     }
-  ]
-};
+  ];
 
-const NAV = [];
-let currentCategory = null;
-let currentProduct = null;
-let currentTab = "info";
+  // ---------- STATE ----------
+  let currentCategory = null;
+  let currentItem = null;
+  let currentTab = "info";
+  let currentScreen = "home"; // home | list | detail
 
-const backBtn = document.getElementById("backBtn");
-const screenTitle = document.getElementById("screenTitle");
+  // ---------- ELEMENTS ----------
+  const screenTitle = document.getElementById("screenTitle");
+  const backBtn = document.getElementById("backBtn");
+  const searchInput = document.getElementById("searchInput");
 
-function showScreen(id, title, showBack) {
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  screenTitle.textContent = title;
-  backBtn.hidden = !showBack;
-}
+  const homeScreen = document.getElementById("homeScreen");
+  const globalResults = document.getElementById("globalResults");
+  const globalGrid = document.getElementById("globalGrid");
 
-function goBack() {
-  const prev = NAV.pop();
-  if (!prev) return;
-  prev();
-}
-
-function openList(categoryKey) {
-  currentCategory = categoryKey;
-  NAV.push(() => showScreen("screen-category", "Find Produce", false));
-  showScreen("screen-list", categoryKey === "fruit" ? "Fruit" : "Vegetables", true);
-  renderList(categoryKey);
-}
-
-function renderList(categoryKey) {
+  const listScreen = document.getElementById("listScreen");
   const listGrid = document.getElementById("listGrid");
-  listGrid.innerHTML = "";
 
-  const items = CATALOG[categoryKey] || [];
-  items.forEach(item => {
-    const card = document.createElement("button");
-    card.className = "item-card";
-    card.onclick = () => openProduct(item.id);
+  const detailScreen = document.getElementById("detailScreen");
+  const detailImg = document.getElementById("detailImg");
+  const detailName = document.getElementById("detailName");
+  const detailMeta = document.getElementById("detailMeta");
+  const tabContent = document.getElementById("tabContent");
 
-    card.innerHTML = `
-      <img class="item-photo" src="${item.img}" alt="${item.name}">
-      <div class="item-meta">
-        <div class="item-price">${item.price}</div>
-        <div class="item-name">${item.name}</div>
-        <div class="item-unit">${item.unit}</div>
-      </div>
-      <div class="item-plus" aria-hidden="true">+</div>
-    `;
-    listGrid.appendChild(card);
+  // ---------- NAV ----------
+  function showScreen(name){
+    currentScreen = name;
+    homeScreen.style.display = (name === "home") ? "block" : "none";
+    listScreen.style.display = (name === "list") ? "block" : "none";
+    detailScreen.style.display = (name === "detail") ? "block" : "none";
+
+    backBtn.style.visibility = (name === "home") ? "hidden" : "visible";
+  }
+
+  backBtn.addEventListener("click", () => {
+    if(currentScreen === "detail"){
+      openCategory(currentCategory, true); // back to list
+    }else{
+      currentCategory = null;
+      currentItem = null;
+      screenTitle.textContent = "Find Produce";
+      showScreen("home");
+      clearSearch();
+      renderGlobalResults(""); // hide
+    }
   });
-}
 
-function openProduct(productId) {
-  const items = CATALOG[currentCategory] || [];
-  const found = items.find(x => x.id === productId);
-  if (!found) return;
-
-  currentProduct = found;
-  currentTab = "info";
-
-  NAV.push(() => showScreen("screen-list", currentCategory === "fruit" ? "Fruit" : "Vegetables", true));
-  showScreen("screen-product", "Product", true);
-
-  const photo = document.getElementById("productPhoto");
-  photo.src = found.img;
-  photo.alt = found.name;
-
-  document.getElementById("productName").textContent = found.name;
-
-  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-  document.querySelector(`.tab[data-tab="info"]`).classList.add("active");
-
-  renderTab();
-}
-
-function setTab(tabKey) {
-  currentTab = tabKey;
-  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-  document.querySelector(`.tab[data-tab="${tabKey}"]`).classList.add("active");
-  renderTab();
-}
-
-function renderTab() {
-  const box = document.getElementById("tabContent");
-  const d = currentProduct.details[currentTab];
-
-  if (d.sections) {
-    box.innerHTML = `
-      <h3>${d.heading}</h3>
-      ${d.sections.map(s => `
-        <div class="subblock">
-          <div class="subhead">${s.title}</div>
-          <ul>${s.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
+  // ---------- RENDER ----------
+  function renderProductCard(item){
+    return `
+      <div class="card product" onclick="openDetail('${item.id}')">
+        <div class="plus">+</div>
+        <div class="img-frame">
+          <img src="${item.img}" alt="${item.name}">
         </div>
-      `).join("")}
+        <div class="badge-price">${item.price}</div>
+        <div class="name">${item.name}</div>
+        <div class="meta">${item.approx}</div>
+      </div>
     `;
-    return;
   }
 
-  if (d.bullets) {
-    box.innerHTML = `<h3>${d.heading}</h3><ul>${d.bullets.map(b => `<li>${b}</li>`).join("")}</ul>`;
-    return;
+  function openCategory(cat, keepSearch=false){
+    currentCategory = cat;
+    screenTitle.textContent = cat === "fruit" ? "Fruit" : "Vegetables";
+    showScreen("list");
+
+    const items = produce.filter(p => p.category === cat);
+    listGrid.innerHTML = items.map(renderProductCard).join("");
+
+    if(!keepSearch) clearSearch();
   }
 
-  box.innerHTML = `<h3>${d.heading}</h3>${d.body.map(p => `<p>${p}</p>`).join("")}`;
-}
+  function openDetail(id){
+    currentItem = produce.find(p => p.id === id);
+    if(!currentItem) return;
+
+    screenTitle.textContent = currentItem.category === "fruit" ? "Fruit" : "Vegetables";
+    showScreen("detail");
+
+    detailImg.src = currentItem.img;
+    detailName.textContent = currentItem.name;
+    detailMeta.textContent = `${currentItem.price} • ${currentItem.approx}`;
+
+    setTab("info");
+  }
+
+  function setTab(tab){
+    currentTab = tab;
+
+    // update active button
+    document.querySelectorAll(".tab").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.tab === tab);
+    });
+
+    tabContent.innerHTML = currentItem.tabs[tab] || "No information available.";
+  }
+
+  // ---------- SEARCH ----------
+  function clearSearch(){
+    searchInput.value = "";
+  }
+
+  function renderGlobalResults(query){
+    const q = query.trim().toLowerCase();
+    if(!q){
+      globalResults.style.display = "none";
+      globalGrid.innerHTML = "";
+      return;
+    }
+    const matches = produce.filter(p =>
+      p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q)
+    );
+
+    globalResults.style.display = "block";
+    globalGrid.innerHTML = matches.length
+      ? matches.map(renderProductCard).join("")
+      : `<p class="helper">No matches found for “${query}”.</p>`;
+  }
+
+  function renderListResults(query){
+    const q = query.trim().toLowerCase();
+    const items = produce.filter(p => p.category === currentCategory);
+    const matches = !q ? items : items.filter(p => p.name.toLowerCase().includes(q) || p.id.includes(q));
+    listGrid.innerHTML = matches.length
+      ? matches.map(renderProductCard).join("")
+      : `<p class="helper">No matches in this category.</p>`;
+  }
+
+  searchInput.addEventListener("input", (e) => {
+    const q = e.target.value;
+
+    if(currentScreen === "home"){
+      renderGlobalResults(q); // ✅ search across fruit + veg on home
+    }else if(currentScreen === "list"){
+      renderListResults(q);   // ✅ search within current category list
+    }else{
+      // on detail screen: optional, you can ignore or jump back
+      // We'll jump to category list results when typing:
+      showScreen("list");
+      renderListResults(q);
+    }
+  });
+
+  // initial
+  showScreen("home");
 </script>
 </body>
 </html>
+
