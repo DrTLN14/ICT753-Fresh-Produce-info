@@ -109,3 +109,316 @@ const CATALOG = {
       img: "images/banana.jpg",
       details: {
         info: { heading: "Product Information", body: [
+          "Lady Finger bananas are small, sweet, and creamy—great for snacks and smoothies.",
+          "Popular for convenience and naturally sweet flavour."
+        ]},
+        storage: { heading: "Storage Guide", sections: [
+          { title: "Room Temperature", bullets: ["Store away from sunlight.", "Keep separate from other fruits to slow ripening."] },
+          { title: "Fridge", bullets: ["Refrigerate ripe bananas; skin may darken but flesh stays fresh."] },
+          { title: "Cut Bananas", bullets: ["Airtight container in fridge.", "Use lemon juice to reduce browning."] }
+        ]},
+        shelf: { heading: "Shelf Life", sections: [
+          { title: "Bench Storage", bullets: ["2–4 days depending on ripeness."] },
+          { title: "Kept Chilled", bullets: ["5–7 days once ripe."] },
+          { title: "Once Cut", bullets: ["Best within 1–2 days."] }
+        ]},
+        farm: { heading: "Farm / Producer", body: [
+          "Example Grower: Tropical Coast Bananas",
+          "Region: Queensland, Australia 🇦🇺"
+        ]},
+        nutrition: { heading: "Nutrition", bullets: [
+          "High in potassium", "Fibre", "Vitamin B6", "Quick energy"
+        ]}
+      }
+    },
+
+    {
+      id: "mango_kensington_pride",
+      name: "Kensington Pride Mango",
+      price: "A$3.99",
+      unit: "1 each",
+      img: "images/mango.jpg",
+      details: {
+        info: { heading: "Product Information", body: [
+          "Kensington Pride mangoes are juicy, aromatic, and richly sweet when ripe.",
+          "Commonly used in smoothies, salads, desserts, and savoury dishes."
+        ]},
+        storage: { heading: "Storage Guide", sections: [
+          { title: "Room Temperature", bullets: ["Ripen on the bench away from sunlight."] },
+          { title: "Fridge", bullets: ["Once ripe, refrigerate to slow ripening."] },
+          { title: "Cut Mango", bullets: ["Airtight container in fridge."] }
+        ]},
+        shelf: { heading: "Shelf Life", sections: [
+          { title: "Bench Storage", bullets: ["Unripe: 2–5 days to ripen.", "Ripe: 1–2 days."] },
+          { title: "Kept Chilled", bullets: ["Ripe: ~3–5 days."] },
+          { title: "Once Cut", bullets: ["Best within 1–2 days."] }
+        ]},
+        farm: { heading: "Farm / Producer", body: [
+          "Example Grower: Northern Tropics Produce Co.",
+          "Region: NT / QLD, Australia 🇦🇺"
+        ]},
+        nutrition: { heading: "Nutrition", bullets: [
+          "Vitamin C", "Vitamin A", "Antioxidants", "Fibre"
+        ]}
+      }
+    },
+
+    {
+      id: "grapes_seedless",
+      name: "Coles Seedless Grapes",
+      price: "A$8.50",
+      unit: "approx. 400g",
+      img: "images/grapes.jpg",
+      details: {
+        info: { heading: "Product Information", body: [
+          "Seedless grapes are crisp and sweet—ideal for snacking and lunchboxes.",
+          "Used in fruit platters, salads, and desserts."
+        ]},
+        storage: { heading: "Storage Guide", sections: [
+          { title: "Fridge (Recommended)", bullets: ["Keep chilled in punnet or breathable container."] },
+          { title: "Before Eating", bullets: ["Rinse just before consuming."] },
+          { title: "Once Washed", bullets: ["Dry well; store with paper towel to reduce moisture."] }
+        ]},
+        shelf: { heading: "Shelf Life", sections: [
+          { title: "Kept Chilled", bullets: ["7–14 days (varies by freshness)."] },
+          { title: "Room Temperature", bullets: ["1–2 days; softens faster."] },
+          { title: "Once Washed", bullets: ["3–5 days if stored dry and chilled."] }
+        ]},
+        farm: { heading: "Farm / Producer", body: [
+          "Example Grower: Sun Valley Vineyards",
+          "Region: VIC / NSW, Australia 🇦🇺"
+        ]},
+        nutrition: { heading: "Nutrition", bullets: [
+          "Antioxidants", "Hydration", "Naturally low fat", "Vitamin K varies"
+        ]}
+      }
+    }
+  ],
+
+  vegetables: [
+    {
+      id: "carrots",
+      name: "Fresh Carrots",
+      price: "A$2.50",
+      unit: "approx. 1kg bag",
+      img: "images/carrots.jpg",
+      details: {
+        info: { heading: "Product Information", body: [
+          "Carrots are crunchy root vegetables used in salads, soups, stir-fries, and snacks.",
+          "They are known for versatility and long shelf life when stored correctly."
+        ]},
+        storage: { heading: "Storage Guide", sections: [
+          { title: "Fridge", bullets: ["Store in crisper drawer in a breathable bag."] },
+          { title: "Cut Carrots", bullets: ["Store in airtight container with cold water; change every 1–2 days."] }
+        ]},
+        shelf: { heading: "Shelf Life", sections: [
+          { title: "Kept Chilled", bullets: ["Whole: ~2–4 weeks (depends on freshness)."] },
+          { title: "Once Cut", bullets: ["4–7 days (kept cold)."] }
+        ]},
+        farm: { heading: "Farm / Producer", body: [
+          "Example Grower: Riverina Fresh Produce",
+          "Region: NSW, Australia 🇦🇺"
+        ]},
+        nutrition: { heading: "Nutrition", bullets: [
+          "Beta-carotene (vitamin A precursor)", "Fibre", "Antioxidants", "Low calorie"
+        ]}
+      }
+    },
+
+    {
+      id: "broccoli",
+      name: "Fresh Broccoli",
+      price: "A$3.20",
+      unit: "1 head",
+      img: "images/broccoli.jpg",
+      details: {
+        info: { heading: "Product Information", body: [
+          "Broccoli is nutrient-dense and commonly steamed, roasted, or added to stir-fries.",
+          "Best quality is firm with deep green florets."
+        ]},
+        storage: { heading: "Storage Guide", sections: [
+          { title: "Fridge", bullets: ["Store unwashed in a breathable bag in the crisper drawer."] },
+          { title: "After Washing", bullets: ["Dry well to reduce moisture and spoilage."] }
+        ]},
+        shelf: { heading: "Shelf Life", sections: [
+          { title: "Kept Chilled", bullets: ["Best quality 3–5 days."] },
+          { title: "Cooked", bullets: ["Cooked broccoli: 3–4 days refrigerated."] }
+        ]},
+        farm: { heading: "Farm / Producer", body: [
+          "Example Grower: Gippsland Greens",
+          "Region: Victoria, Australia 🇦🇺"
+        ]},
+        nutrition: { heading: "Nutrition", bullets: [
+          "Vitamin C", "Vitamin K", "Fibre", "Antioxidants"
+        ]}
+      }
+    },
+
+    {
+      id: "lettuce",
+      name: "Cos Lettuce",
+      price: "A$2.80",
+      unit: "1 each",
+      img: "images/lettuce.jpg",
+      details: {
+        info: { heading: "Product Information", body: [
+          "Cos (romaine) lettuce is crisp and popular for salads, wraps, and sandwiches.",
+          "Fresh leaves should be firm and vibrant with minimal browning."
+        ]},
+        storage: { heading: "Storage Guide", sections: [
+          { title: "Fridge", bullets: ["Keep unwashed in the crisper drawer.", "Wrap in paper towel to reduce moisture."] },
+          { title: "Washed Leaves", bullets: ["Dry thoroughly; store in container lined with paper towel."] }
+        ]},
+        shelf: { heading: "Shelf Life", sections: [
+          { title: "Kept Chilled", bullets: ["Best quality 5–7 days if kept dry."] },
+          { title: "Once Washed", bullets: ["3–5 days (dry + chilled)."] }
+        ]},
+        farm: { heading: "Farm / Producer", body: [
+          "Example Grower: Sydney Basin Farms",
+          "Region: NSW, Australia 🇦🇺"
+        ]},
+        nutrition: { heading: "Nutrition", bullets: [
+          "Hydrating, low calorie", "Folate", "Vitamin K", "Some fibre"
+        ]}
+      }
+    },
+
+    {
+      id: "onions",
+      name: "Brown Onions",
+      price: "A$3.00",
+      unit: "approx. 1kg bag",
+      img: "images/onions.jpg",
+      details: {
+        info: { heading: "Product Information", body: [
+          "Brown onions are a staple ingredient used in soups, sauces, curries, and stir-fries.",
+          "They have long shelf life when stored cool, dry, and well-ventilated."
+        ]},
+        storage: { heading: "Storage Guide", sections: [
+          { title: "Pantry", bullets: ["Store whole onions in a cool, dry place with airflow.", "Avoid storing next to potatoes."] },
+          { title: "Cut Onion", bullets: ["Airtight container in the fridge."] }
+        ]},
+        shelf: { heading: "Shelf Life", sections: [
+          { title: "Pantry Storage", bullets: ["Whole: ~2–4 weeks depending on conditions."] },
+          { title: "Once Cut", bullets: ["3–5 days refrigerated."] }
+        ]},
+        farm: { heading: "Farm / Producer", body: [
+          "Example Grower: Murray Valley Produce",
+          "Region: VIC/NSW, Australia 🇦🇺"
+        ]},
+        nutrition: { heading: "Nutrition", bullets: [
+          "Antioxidants (e.g., quercetin)", "Adds flavour with few calories", "Small amounts of vitamin C"
+        ]}
+      }
+    }
+  ]
+};
+
+const NAV = [];
+let currentCategory = null;
+let currentProduct = null;
+let currentTab = "info";
+
+const backBtn = document.getElementById("backBtn");
+const screenTitle = document.getElementById("screenTitle");
+
+function showScreen(id, title, showBack) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  screenTitle.textContent = title;
+  backBtn.hidden = !showBack;
+}
+
+function goBack() {
+  const prev = NAV.pop();
+  if (!prev) return;
+  prev();
+}
+
+function openList(categoryKey) {
+  currentCategory = categoryKey;
+  NAV.push(() => showScreen("screen-category", "Find Produce", false));
+  showScreen("screen-list", categoryKey === "fruit" ? "Fruit" : "Vegetables", true);
+  renderList(categoryKey);
+}
+
+function renderList(categoryKey) {
+  const listGrid = document.getElementById("listGrid");
+  listGrid.innerHTML = "";
+
+  const items = CATALOG[categoryKey] || [];
+  items.forEach(item => {
+    const card = document.createElement("button");
+    card.className = "item-card";
+    card.onclick = () => openProduct(item.id);
+
+    card.innerHTML = `
+      <img class="item-photo" src="${item.img}" alt="${item.name}">
+      <div class="item-meta">
+        <div class="item-price">${item.price}</div>
+        <div class="item-name">${item.name}</div>
+        <div class="item-unit">${item.unit}</div>
+      </div>
+      <div class="item-plus" aria-hidden="true">+</div>
+    `;
+    listGrid.appendChild(card);
+  });
+}
+
+function openProduct(productId) {
+  const items = CATALOG[currentCategory] || [];
+  const found = items.find(x => x.id === productId);
+  if (!found) return;
+
+  currentProduct = found;
+  currentTab = "info";
+
+  NAV.push(() => showScreen("screen-list", currentCategory === "fruit" ? "Fruit" : "Vegetables", true));
+  showScreen("screen-product", "Product", true);
+
+  const photo = document.getElementById("productPhoto");
+  photo.src = found.img;
+  photo.alt = found.name;
+
+  document.getElementById("productName").textContent = found.name;
+
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.querySelector(`.tab[data-tab="info"]`).classList.add("active");
+
+  renderTab();
+}
+
+function setTab(tabKey) {
+  currentTab = tabKey;
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.querySelector(`.tab[data-tab="${tabKey}"]`).classList.add("active");
+  renderTab();
+}
+
+function renderTab() {
+  const box = document.getElementById("tabContent");
+  const d = currentProduct.details[currentTab];
+
+  if (d.sections) {
+    box.innerHTML = `
+      <h3>${d.heading}</h3>
+      ${d.sections.map(s => `
+        <div class="subblock">
+          <div class="subhead">${s.title}</div>
+          <ul>${s.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
+        </div>
+      `).join("")}
+    `;
+    return;
+  }
+
+  if (d.bullets) {
+    box.innerHTML = `<h3>${d.heading}</h3><ul>${d.bullets.map(b => `<li>${b}</li>`).join("")}</ul>`;
+    return;
+  }
+
+  box.innerHTML = `<h3>${d.heading}</h3>${d.body.map(p => `<p>${p}</p>`).join("")}`;
+}
+</script>
+</body>
+</html>
