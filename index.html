@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fresh Produce Info</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <div class="menu">
+    <button onclick="showSection('storage')">Storage Guide</button>
+    <button onclick="showSection('shelf')">Shelf Life</button>
+    <button onclick="showSection('farm')">Farm / Producer</button>
+    <button onclick="showSection('nutrition')">Nutrition</button>
+  </div>
+
+  <div class="card">
+
+    <div id="storage" class="section active">
+      <h2>Storage Guide</h2>
+      <p>Store Lady Finger bananas in a fruit bowl away from direct sunlight.</p>
+    </div>
+
+    <div id="shelf" class="section">
+      <h2>Shelf Life</h2>
+      <p>Fresh for 2–4 days at room temperature. Refrigeration extends shelf life.</p>
+    </div>
+
+    <div id="farm" class="section">
+      <h2>Farm / Producer</h2>
+      <p>Queensland, Australia 🇦🇺</p>
+    </div>
+
+    <div id="nutrition" class="section">
+      <h2>Nutrition</h2>
+      <ul>
+        <li>High in potassium</li>
+        <li>Good source of dietary fibre</li>
+        <li>Contains vitamin B6</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(section => {
+    section.classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+}
+</script>
+
+</body>
+</html>
