@@ -1,0 +1,46 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
+
+.container {
+  display: flex;
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+.menu {
+  width: 200px;
+}
+
+.menu button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: none;
+  background: #ffffff;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 8px;
+}
+
+.menu button:hover {
+  background: #eaeaea;
+}
+
+.card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-left: 20px;
+  width: 100%;
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
