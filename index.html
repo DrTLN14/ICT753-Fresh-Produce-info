@@ -111,339 +111,7 @@
             <li>Naturally low in fat and sodium</li>
           </ul>`
       }
-       // Fruit catalogue items (matches the structure in your banana example)
-const products = [
-  {
-    id: "cherry",
-    category: "fruit",
-    name: "Coles Sweet Red Cherries",
-    price: "A$7.90",
-    approx: "approx. 250g",
-    img: "images/cherry.jpg",
-    tabs: {
-      info: `Bright, juicy and sweet—perfect for snacking, topping yoghurt, or adding to summer salads.`,
-      storage: `
-        <ul>
-          <li><b>Fridge:</b> Store unwashed in a breathable container; wash just before eating.</li>
-          <li><b>Bench:</b> Best avoided—softens quickly at room temperature.</li>
-          <li><b>Tip:</b> Keep stems on to help maintain freshness.</li>
-        </ul>`,
-      shelf: `
-        <ul>
-          <li><b>Fridge:</b> 5–7 days (best flavour in first 3–4 days).</li>
-          <li><b>Bench:</b> 1 day max in warm weather.</li>
-        </ul>`,
-      farm: `Example grower: Riverina Orchard Co-op<br/>Region: Riverina, New South Wales`,
-      nutrition: `
-        <ul>
-          <li>Source of vitamin C</li>
-          <li>Contains antioxidants (polyphenols)</li>
-          <li>Hydrating snack with natural sugars</li>
-        </ul>`
-    }
-  },
-
-  {
-    id: "kiwi",
-    category: "fruit",
-    name: "Coles Zesty Kiwi Fruit",
-    price: "A$1.20",
-    approx: "approx. 110g",
-    img: "images/kiwi.jpg",
-    tabs: {
-      info: `Tangy-sweet with a vibrant green centre—great for smoothies, fruit bowls, and desserts.`,
-      storage: `
-        <ul>
-          <li><b>Bench:</b> Ripen at room temperature until slightly soft to touch.</li>
-          <li><b>Fridge:</b> Once ripe, refrigerate to slow further ripening.</li>
-          <li><b>Tip:</b> Store away from bananas/apples if you want slower ripening.</li>
-        </ul>`,
-      shelf: `
-        <ul>
-          <li><b>Unripe (bench):</b> 3–6 days to ripen.</li>
-          <li><b>Ripe (fridge):</b> 5–10 days.</li>
-        </ul>`,
-      farm: `Example grower: Coastal Kiwi Farms<br/>Region: Coffs Coast, New South Wales`,
-      nutrition: `
-        <ul>
-          <li>High in vitamin C</li>
-          <li>Dietary fibre support</li>
-          <li>Contains potassium</li>
-        </ul>`
-    }
-  },
-
-  {
-    id: "lemon",
-    category: "fruit",
-    name: "Coles Australian Lemons",
-    price: "A$1.10",
-    approx: "approx. 140g",
-    img: "images/lemon.jpg",
-    tabs: {
-      info: `Sharp and aromatic—ideal for dressings, marinades, baking, and fresh lemonade.`,
-      storage: `
-        <ul>
-          <li><b>Fridge:</b> Store in crisper drawer for longest life.</li>
-          <li><b>Bench:</b> Fine short-term, but skin can dry out faster.</li>
-          <li><b>Tip:</b> Roll on bench before juicing to release more juice.</li>
-        </ul>`,
-      shelf: `
-        <ul>
-          <li><b>Fridge:</b> 2–4 weeks.</li>
-          <li><b>Bench:</b> 5–10 days.</li>
-        </ul>`,
-      farm: `Example grower: Sunridge Citrus Collective<br/>Region: Sunraysia, Victoria`,
-      nutrition: `
-        <ul>
-          <li>Vitamin C boost</li>
-          <li>Low kilojoule flavour enhancer</li>
-          <li>Contains citrus flavonoids</li>
-        </ul>`
-    }
-  },
-
-  {
-    id: "orange",
-    category: "fruit",
-    name: "Coles Navel Oranges",
-    price: "A$1.30",
-    approx: "approx. 180g",
-    img: "images/orange.jpg",
-    tabs: {
-      info: `Sweet, easy-peel and super juicy—perfect for lunchboxes or fresh squeezing.`,
-      storage: `
-        <ul>
-          <li><b>Fridge:</b> Store in crisper for extended freshness.</li>
-          <li><b>Bench:</b> Keep in a cool, airy spot out of direct sunlight.</li>
-          <li><b>Tip:</b> Keep dry to reduce mould risk.</li>
-        </ul>`,
-      shelf: `
-        <ul>
-          <li><b>Bench:</b> 7–10 days.</li>
-          <li><b>Fridge:</b> 2–3 weeks.</li>
-        </ul>`,
-      farm: `Example grower: Murray Valley Citrus Pty Ltd<br/>Region: Mildura District, Victoria`,
-      nutrition: `
-        <ul>
-          <li>Excellent source of vitamin C</li>
-          <li>Hydration-friendly snack</li>
-          <li>Contains folate</li>
-        </ul>`
-    }
-  },
-
-  {
-    id: "papaya",
-    category: "fruit",
-    name: "Coles Tropical Papaya",
-    price: "A$6.50",
-    approx: "approx. 700g",
-    img: "images/papaya.jpg",
-    tabs: {
-      info: `Soft, fragrant and mellow-sweet—great with lime, in smoothies, or breakfast bowls.`,
-      storage: `
-        <ul>
-          <li><b>Bench:</b> Ripen until skin turns yellow-orange and yields slightly.</li>
-          <li><b>Fridge:</b> Once ripe, refrigerate whole or cut (sealed).</li>
-          <li><b>Cut fruit:</b> Store in an airtight container.</li>
-        </ul>`,
-      shelf: `
-        <ul>
-          <li><b>Unripe (bench):</b> 2–5 days to ripen.</li>
-          <li><b>Ripe (fridge):</b> 2–4 days.</li>
-          <li><b>Cut (fridge):</b> 1–2 days.</li>
-        </ul>`,
-      farm: `Example grower: Far North Tropics Produce Co-op<br/>Region: Atherton Tablelands, Queensland`,
-      nutrition: `
-        <ul>
-          <li>Vitamin C and vitamin A (beta-carotene)</li>
-          <li>Contains fibre</li>
-          <li>Naturally sweet, low fat</li>
-        </ul>`
-    }
-  },
-
-  {
-    id: "peach",
-    category: "fruit",
-    name: "Coles Juicy Yellow Peaches",
-    price: "A$2.40",
-    approx: "approx. 170g",
-    img: "images/peach.jpg",
-    tabs: {
-      info: `Fragrant and silky—ideal for eating fresh, grilling, or adding to oats and desserts.`,
-      storage: `
-        <ul>
-          <li><b>Bench:</b> Ripen stem-side down until fragrant and slightly soft.</li>
-          <li><b>Fridge:</b> Once ripe, refrigerate to hold freshness.</li>
-          <li><b>Tip:</b> Bring to room temp before eating for best flavour.</li>
-        </ul>`,
-      shelf: `
-        <ul>
-          <li><b>Unripe (bench):</b> 2–4 days to ripen.</li>
-          <li><b>Ripe (fridge):</b> 3–5 days.</li>
-        </ul>`,
-      farm: `Example grower: Goulburn Valley Stonefruit Growers<br/>Region: Shepparton, Victoria`,
-      nutrition: `
-        <ul>
-          <li>Source of vitamin C</li>
-          <li>Contains potassium</li>
-          <li>Hydrating fruit with fibre</li>
-        </ul>`
-    }
-  },
-
-  {
-    id: "pineapple",
-    category: "fruit",
-    name: "Coles Sweet Gold Pineapple",
-    price: "A$5.80",
-    approx: "approx. 1.4kg",
-    img: "images/pineapple.jpg",
-    tabs: {
-      info: `Tropical, tangy-sweet and aromatic—great for smoothies, grilling, salsas, and desserts.`,
-      storage: `
-        <ul>
-          <li><b>Bench:</b> Store upright in a cool area for short periods.</li>
-          <li><b>Fridge:</b> Whole pineapple can chill 2–3 days; cut pineapple should be sealed.</li>
-          <li><b>Tip:</b> For easier prep, slice and store portions for quick snacks.</li>
-        </ul>`,
-      shelf: `
-        <ul>
-          <li><b>Whole (bench):</b> 2–3 days.</li>
-          <li><b>Whole (fridge):</b> 3–5 days.</li>
-          <li><b>Cut (fridge):</b> 3–4 days.</li>
-        </ul>`,
-      farm: `Example grower: Sunshine Coast Pineapple Estates<br/>Region: Glass House Mountains, Queensland`,
-      nutrition: `
-        <ul>
-          <li>Vitamin C source</li>
-          <li>Contains manganese</li>
-          <li>Natural enzymes (e.g., bromelain)</li>
-        </ul>`
-    }
-  },
-
-  {
-    id: "plum",
-    category: "fruit",
-    name: "Coles Red Plums",
-    price: "A$1.90",
-    approx: "approx. 140g",
-    img: "images/plum.jpg",
-    tabs: {
-      info: `Sweet-tart and juicy—perfect for snacking, baking, or adding to salads and cheese boards.`,
-      storage: `
-        <ul>
-          <li><b>Bench:</b> Ripen until slightly soft.</li>
-          <li><b>Fridge:</b> Once ripe, refrigerate to extend freshness.</li>
-          <li><b>Tip:</b> Keep in a single layer to avoid bruising.</li>
-        </ul>`,
-      shelf: `
-        <ul>
-          <li><b>Unripe (bench):</b> 2–4 days to ripen.</li>
-          <li><b>Ripe (fridge):</b> 3–6 days.</li>
-        </ul>`,
-      farm: `Example grower: Riverland Stonefruit Group<br/>Region: Riverland, South Australia`,
-      nutrition: `
-        <ul>
-          <li>Source of vitamin C</li>
-          <li>Contains fibre</li>
-          <li>Natural antioxidants (polyphenols)</li>
-        </ul>`
-    }
-  },
-
-  {
-    id: "pomegranate",
-    category: "fruit",
-    name: "Coles Pomegranate",
-    price: "A$3.50",
-    approx: "approx. 350g",
-    img: "images/pomegranate.jpg",
-    tabs: {
-      info: `Crisp, jewel-like arils with a sweet-tart pop—great for salads, yoghurt, and desserts.`,
-      storage: `
-        <ul>
-          <li><b>Fridge:</b> Store whole pomegranate in crisper.</li>
-          <li><b>Arils:</b> Keep refrigerated in airtight container.</li>
-          <li><b>Tip:</b> De-seed in a bowl of water to reduce splatter.</li>
-        </ul>`,
-      shelf: `
-        <ul>
-          <li><b>Whole (fridge):</b> 2–4 weeks.</li>
-          <li><b>Arils (fridge):</b> 3–5 days.</li>
-        </ul>`,
-      farm: `Example grower: Darling Downs Orchard Partners<br/>Region: Granite Belt, Queensland`,
-      nutrition: `
-        <ul>
-          <li>Antioxidant-rich fruit</li>
-          <li>Source of vitamin C</li>
-          <li>Contains fibre (especially in arils)</li>
-        </ul>`
-    }
-  },
-
-  {
-    id: "strawberry",
-    category: "fruit",
-    name: "Coles Fresh Strawberries",
-    price: "A$4.90",
-    approx: "approx. 250g",
-    img: "images/strawberry.jpg",
-    tabs: {
-      info: `Sweet and fragrant—perfect for snacking, desserts, or blending into smoothies.`,
-      storage: `
-        <ul>
-          <li><b>Fridge:</b> Keep unwashed; line container with paper towel to absorb moisture.</li>
-          <li><b>Wash:</b> Only wash right before eating to reduce mould.</li>
-          <li><b>Tip:</b> Remove any soft berries to prevent spread.</li>
-        </ul>`,
-      shelf: `
-        <ul>
-          <li><b>Fridge:</b> 2–5 days (best in first 1–2 days).</li>
-          <li><b>Bench:</b> Same day only.</li>
-        </ul>`,
-      farm: `Example grower: Gippsland Berry Growers Co-op<br/>Region: West Gippsland, Victoria`,
-      nutrition: `
-        <ul>
-          <li>High in vitamin C</li>
-          <li>Contains folate</li>
-          <li>Fibre-friendly snack</li>
-        </ul>`
-    }
-  },
-
-  {
-    id: "watermelon",
-    category: "fruit",
-    name: "Coles Seedless Watermelon",
-    price: "A$8.90",
-    approx: "approx. 3.5kg",
-    img: "images/watermelon.jpg",
-    tabs: {
-      info: `Crisp, super hydrating and lightly sweet—ideal for hot days, fruit salads, and juices.`,
-      storage: `
-        <ul>
-          <li><b>Whole:</b> Store on bench in a cool spot.</li>
-          <li><b>Cut:</b> Refrigerate in an airtight container or tightly wrapped.</li>
-          <li><b>Tip:</b> Chill before serving for best texture and sweetness.</li>
-        </ul>`,
-      shelf: `
-        <ul>
-          <li><b>Whole (bench):</b> 7–14 days.</li>
-          <li><b>Cut (fridge):</b> 3–5 days.</li>
-        </ul>`,
-      farm: `Example grower: Ord Valley Melon Producers<br/>Region: Kununurra, Western Australia`,
-      nutrition: `
-        <ul>
-          <li>Very hydrating (high water content)</li>
-          <li>Contains vitamin A (carotenoids)</li>
-          <li>Includes lycopene (antioxidant)</li>
-        </ul>`
-    }
-  }
+    },
 
     {
       id: "banana",
@@ -475,6 +143,127 @@ const products = [
           </ul>`
       }
     },
+
+    {
+      id: "cherry",
+      category: "fruit",
+      name: "Coles Sweet Red Cherries",
+      price: "A$7.90",
+      approx: "approx. 250g",
+      img: "images/cherry.jpg",
+      tabs: {
+        info: `Bright, juicy and sweet—perfect for snacking, topping yoghurt, or adding to summer salads.`,
+        storage: `
+          <ul>
+            <li><b>Fridge:</b> Store unwashed in a breathable container; wash just before eating.</li>
+            <li><b>Bench:</b> Best avoided—softens quickly at room temperature.</li>
+            <li><b>Tip:</b> Keep stems on to help maintain freshness.</li>
+          </ul>`,
+        shelf: `
+          <ul>
+            <li><b>Fridge:</b> 5–7 days (best flavour in first 3–4 days).</li>
+            <li><b>Bench:</b> 1 day max in warm weather.</li>
+          </ul>`,
+        farm: `Example grower: Riverina Orchard Co-op<br/>Region: Riverina, New South Wales`,
+        nutrition: `
+          <ul>
+            <li>Source of vitamin C</li>
+            <li>Contains antioxidants (polyphenols)</li>
+            <li>Hydrating snack with natural sugars</li>
+          </ul>`
+      }
+    },
+
+    {
+      id: "kiwi",
+      category: "fruit",
+      name: "Coles Zesty Kiwi Fruit",
+      price: "A$1.20",
+      approx: "approx. 110g",
+      img: "images/kiwi.jpg",
+      tabs: {
+        info: `Tangy-sweet with a vibrant green centre—great for smoothies, fruit bowls, and desserts.`,
+        storage: `
+          <ul>
+            <li><b>Bench:</b> Ripen at room temperature until slightly soft to touch.</li>
+            <li><b>Fridge:</b> Once ripe, refrigerate to slow further ripening.</li>
+            <li><b>Tip:</b> Store away from bananas/apples if you want slower ripening.</li>
+          </ul>`,
+        shelf: `
+          <ul>
+            <li><b>Unripe (bench):</b> 3–6 days to ripen.</li>
+            <li><b>Ripe (fridge):</b> 5–10 days.</li>
+          </ul>`,
+        farm: `Example grower: Coastal Kiwi Farms<br/>Region: Coffs Coast, New South Wales`,
+        nutrition: `
+          <ul>
+            <li>High in vitamin C</li>
+            <li>Dietary fibre support</li>
+            <li>Contains potassium</li>
+          </ul>`
+      }
+    },
+
+    {
+      id: "lemon",
+      category: "fruit",
+      name: "Coles Australian Lemons",
+      price: "A$1.10",
+      approx: "approx. 140g",
+      img: "images/lemon.jpg",
+      tabs: {
+        info: `Sharp and aromatic—ideal for dressings, marinades, baking, and fresh lemonade.`,
+        storage: `
+          <ul>
+            <li><b>Fridge:</b> Store in crisper drawer for longest life.</li>
+            <li><b>Bench:</b> Fine short-term, but skin can dry out faster.</li>
+            <li><b>Tip:</b> Roll on bench before juicing to release more juice.</li>
+          </ul>`,
+        shelf: `
+          <ul>
+            <li><b>Fridge:</b> 2–4 weeks.</li>
+            <li><b>Bench:</b> 5–10 days.</li>
+          </ul>`,
+        farm: `Example grower: Sunridge Citrus Collective<br/>Region: Sunraysia, Victoria`,
+        nutrition: `
+          <ul>
+            <li>Vitamin C boost</li>
+            <li>Low kilojoule flavour enhancer</li>
+            <li>Contains citrus flavonoids</li>
+          </ul>`
+      }
+    },
+
+    {
+      id: "orange",
+      category: "fruit",
+      name: "Coles Navel Oranges",
+      price: "A$1.30",
+      approx: "approx. 180g",
+      img: "images/orange.jpg",
+      tabs: {
+        info: `Sweet, easy-peel and super juicy—perfect for lunchboxes or fresh squeezing.`,
+        storage: `
+          <ul>
+            <li><b>Fridge:</b> Store in crisper for extended freshness.</li>
+            <li><b>Bench:</b> Keep in a cool, airy spot out of direct sunlight.</li>
+            <li><b>Tip:</b> Keep dry to reduce mould risk.</li>
+          </ul>`,
+        shelf: `
+          <ul>
+            <li><b>Bench:</b> 7–10 days.</li>
+            <li><b>Fridge:</b> 2–3 weeks.</li>
+          </ul>`,
+        farm: `Example grower: Murray Valley Citrus Pty Ltd<br/>Region: Mildura District, Victoria`,
+        nutrition: `
+          <ul>
+            <li>Excellent source of vitamin C</li>
+            <li>Hydration-friendly snack</li>
+            <li>Contains folate</li>
+          </ul>`
+      }
+    },
+
     {
       id: "mango",
       category: "fruit",
@@ -505,6 +294,7 @@ const products = [
           </ul>`
       }
     },
+
     {
       id: "grapes",
       category: "fruit",
@@ -565,6 +355,7 @@ const products = [
           </ul>`
       }
     },
+
     {
       id: "broccoli",
       category: "vegetables",
@@ -594,6 +385,7 @@ const products = [
           </ul>`
       }
     },
+
     {
       id: "lettuce",
       category: "vegetables",
@@ -623,6 +415,7 @@ const products = [
           </ul>`
       }
     },
+
     {
       id: "onions",
       category: "vegetables",
@@ -743,12 +536,13 @@ const products = [
   function setTab(tab){
     currentTab = tab;
 
-    // update active button
     document.querySelectorAll(".tab").forEach(btn => {
       btn.classList.toggle("active", btn.dataset.tab === tab);
     });
 
-    tabContent.innerHTML = currentItem.tabs[tab] || "No information available.";
+    tabContent.innerHTML = (currentItem && currentItem.tabs && currentItem.tabs[tab])
+      ? currentItem.tabs[tab]
+      : "No information available.";
   }
 
   // ---------- SEARCH ----------
@@ -776,7 +570,10 @@ const products = [
   function renderListResults(query){
     const q = query.trim().toLowerCase();
     const items = produce.filter(p => p.category === currentCategory);
-    const matches = !q ? items : items.filter(p => p.name.toLowerCase().includes(q) || p.id.includes(q));
+    const matches = !q
+      ? items
+      : items.filter(p => p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q));
+
     listGrid.innerHTML = matches.length
       ? matches.map(renderProductCard).join("")
       : `<p class="helper">No matches in this category.</p>`;
@@ -786,12 +583,10 @@ const products = [
     const q = e.target.value;
 
     if(currentScreen === "home"){
-      renderGlobalResults(q); // ✅ search across fruit + veg on home
+      renderGlobalResults(q);
     }else if(currentScreen === "list"){
-      renderListResults(q);   // ✅ search within current category list
+      renderListResults(q);
     }else{
-      // on detail screen: optional, you can ignore or jump back
-      // We'll jump to category list results when typing:
       showScreen("list");
       renderListResults(q);
     }
@@ -802,4 +597,3 @@ const products = [
 </script>
 </body>
 </html>
-
