@@ -287,3 +287,33 @@ body{
 }
 
 ul{ padding-left:18px; margin:8px 0; }
+/* Pagination */
+.pager{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:14px;
+}
+
+.pager-btn{
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:14px;
+  padding:10px 14px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow: 0 10px 18px rgba(16,24,40,.08);
+}
+
+.pager-btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+  box-shadow:none;
+}
+
+.pager-info{
+  font-weight:700;
+  color: var(--muted);
+  font-size:13px;
+}
