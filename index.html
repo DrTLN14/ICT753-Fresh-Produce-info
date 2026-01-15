@@ -458,6 +458,10 @@
   let currentItem = null;
   let currentTab = "info";
   let currentScreen = "home"; // home | list | detail
+  // ---------- PAGINATION STATE ----------
+const PAGE_SIZE = 4;
+let currentPage = 1;
+let currentListMatches = [];
 
   // ---------- ELEMENTS ----------
   const screenTitle = document.getElementById("screenTitle");
@@ -501,13 +505,14 @@ const pageInfo = document.getElementById("pageInfo");
       showScreen("home");
       clearSearch();
       renderGlobalResults(""); // hide
+      
     }
   });
 
   // ---------- RENDER ----------
   function renderProductCard(item){
     return `
-      <div class="card product" onclick="openDetail('${item.id}')">
+<div class="card product" onclick="openDetail('${item.id}')">
         <div class="plus">+</div>
         <div class="img-frame">
           <img src="${item.img}" alt="${item.name}">
@@ -517,18 +522,72 @@ const pageInfo = document.getElementById("pageInfo");
         <div class="meta">${item.approx}</div>
       </div>
     `;
-  }
+    function renderListResults(query){
+  const q = query.trim().toLowerCase();
+  const items = produce.filter(p => p.category === currentCategory);
 
-  function openCategory(cat, keepSearch=false){
-    currentCategory = cat;
-    screenTitle.textContent = cat === "fruit" ? "Fruit" : "Vegetables";
-    showScreen("list");
+  currentListMatches = !q
+    ? items
+    : items.filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        p.id.toLowerCase().includes(q)
+      );
 
-    const items = produce.filter(p => p.category === cat);
-    listGrid.innerHTML = items.map(renderProductCard).join("");
+  currentPage = 1;
+  renderCurrentPage();
+}
 
-    if(!keepSearch) clearSearch();
-  }
+// ---------- PAGINATION ----------
+function renderCurrentPage(){
+  const total = currentListMatches.length;
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+
+  // clamp page
+  currentPage = Math.min(Math.max(1, currentPage), totalPages);
+
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const pageItems = currentListMatches.slice(start, start + PAGE_SIZE);
+
+  // ✅ ONLY 4 ITEMS RENDER HERE
+  listGrid.innerHTML = pageItems.length
+    ? pageItems.map(renderProductCard).join("")
+    : `<p class="helper">No matches in this category.</p>`;
+
+  // pager UI
+  if (pager) pager.style.display = (totalPages > 1) ? "flex" : "none";
+  if (pageInfo) pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+  if (prevBtn) prevBtn.disabled = currentPage <= 1;
+  if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
+}
+
+// Pager buttons
+if (prevBtn){
+  prevBtn.addEventListener("click", () => {
+    currentPage--;
+    renderCurrentPage();
+  });
+}
+
+if (nextBtn){
+  nextBtn.addEventListener("click", () => {
+    currentPage++;
+    renderCurrentPage();
+  });
+}
+
+function openCategory(cat, keepSearch=false){
+  currentCategory = cat;
+  screenTitle.textContent = cat === "fruit" ? "Fruit" : "Vegetables";
+  showScreen("list");
+
+  // pagination setup
+  currentListMatches = produce.filter(p => p.category === cat);
+  currentPage = 1;
+
+  renderCurrentPage();
+
+  if(!keepSearch) clearSearch();
+}
 
   function openDetail(id){
     currentItem = produce.find(p => p.id === id);
