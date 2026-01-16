@@ -507,6 +507,20 @@ const pageInfo = document.getElementById("pageInfo");
     renderGlobalResults(""); // hide
   }
 });
+// ---------- RENDER ----------
+function renderProductCard(item){
+  return `
+    <div class="card product" onclick="openDetail('${item.id}')">
+      <div class="plus">+</div>
+      <div class="img-frame">
+        <img src="${item.img}" alt="${item.name}">
+      </div>
+      <div class="badge-price">${item.price}</div>
+      <div class="name">${item.name}</div>
+      <div class="meta">${item.approx}</div>
+    </div>
+  `;
+}
 
     function renderListResults(query){
   const q = query.trim().toLowerCase();
@@ -566,28 +580,30 @@ function openCategory(cat, keepSearch=false){
   screenTitle.textContent = cat === "fruit" ? "Fruit" : "Vegetables";
   showScreen("list");
 
-  // pagination setup
-  currentListMatches = produce.filter(p => p.category === cat);
-  currentPage = 1;
+  if (!keepSearch) clearSearch();
 
-  renderCurrentPage();
-
-  if(!keepSearch) clearSearch();
+  // ✅ render via search-aware, pagination-safe path
+  renderListResults(searchInput.value);
 }
 
-  function openDetail(id){
-    currentItem = produce.find(p => p.id === id);
-    if(!currentItem) return;
+function openDetail(id){
+  currentItem = produce.find(p => p.id === id);
+  if (!currentItem) return;
 
-    screenTitle.textContent = currentItem.category === "fruit" ? "Fruit" : "Vegetables";
-    showScreen("detail");
+  // ✅ KEEP CATEGORY STATE (CRITICAL)
+  currentCategory = currentItem.category;
 
-    detailImg.src = currentItem.img;
-    detailName.textContent = currentItem.name;
-    detailMeta.textContent = `${currentItem.price} • ${currentItem.approx}`;
+  screenTitle.textContent =
+    currentItem.category === "fruit" ? "Fruit" : "Vegetables";
 
-    setTab("info");
-  }
+  showScreen("detail");
+
+  detailImg.src = currentItem.img;
+  detailName.textContent = currentItem.name;
+  detailMeta.textContent = `${currentItem.price} • ${currentItem.approx}`;
+
+  setTab("info");
+}
 
   function setTab(tab){
     currentTab = tab;
@@ -623,30 +639,26 @@ function openCategory(cat, keepSearch=false){
       : `<p class="helper">No matches found for “${query}”.</p>`;
   }
 
-  function renderListResults(query){
-    const q = query.trim().toLowerCase();
-    const items = produce.filter(p => p.category === currentCategory);
-    const matches = !q
-      ? items
-      : items.filter(p => p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q));
+searchInput.addEventListener("input", (e) => {
+  const q = e.target.value;
 
-    listGrid.innerHTML = matches.length
-      ? matches.map(renderProductCard).join("")
-      : `<p class="helper">No matches in this category.</p>`;
+  // 1) Home screen = global search results
+  if (currentScreen === "home") {
+    renderGlobalResults(q);
+    return;
   }
 
-  searchInput.addEventListener("input", (e) => {
-    const q = e.target.value;
+  // 2) If user types while on detail screen, jump back to the list
+  //    but keep the category and keep the current search text
+  if (currentScreen === "detail") {
+    if (currentItem) openCategory(currentItem.category, true);
+    // IMPORTANT: openCategory() already calls renderListResults(searchInput.value)
+    return;
+  }
 
-    if(currentScreen === "home"){
-      renderGlobalResults(q);
-    }else if(currentScreen === "list"){
-      renderListResults(q);
-    }else{
-      showScreen("list");
-      renderListResults(q);
-    }
-  });
+  // 3) List screen = paginated list search
+  renderListResults(q);
+});
 
   // initial
   showScreen("home");
